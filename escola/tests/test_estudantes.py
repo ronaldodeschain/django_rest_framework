@@ -7,28 +7,32 @@ from escola.models import Estudante
 from escola.serializers import EstudanteSerializer
 
 class EstudantesTestCase(APITestCase):
+    fixtures = ['prototipo_banco.json']
     def setUp(self):
-        self.usuario = User.objects.create_superuser(
-            username='admin',
-            password='admin',
-            email='email@email'
-        )
+        # self.usuario = User.objects.create_superuser(
+        #     username='admin',
+        #     password='admin',
+        #     email='email@email'
+        # )
+        self.usuario = User.objects.get(username='ronaldo')
         self.url = reverse('Estudantes-list')
         self.client.force_authenticate(user=self.usuario) # type: ignore
-        self.estudante_01 = Estudante.objects.create(
-            nome = 'Teste Estudante UM',
-            email = 'testeemailestudante01@gmail.com',
-            cpf = '73231954037',
-            data_nascimento = '2024-01-01',
-            celular = '86 99999-9999',
-        )
-        self.estudante_02 = Estudante.objects.create(
-            nome = 'Teste Estudante DOIS',
-            email = 'testeemailestudante02@gmail.com',
-            cpf = '76791271078',
-            data_nascimento = '2024-01-01',
-            celular = '86 99999-9999',
-        )
+        # self.estudante_01 = Estudante.objects.create(
+        #     nome = 'Teste Estudante UM',
+        #     email = 'testeemailestudante01@gmail.com',
+        #     cpf = '73231954037',
+        #     data_nascimento = '2024-01-01',
+        #     celular = '86 99999-9999',
+        # )
+        self.estudante_01 = Estudante.objects.get(pk=1)
+        self.estudante_02 = Estudante.objects.get(pk=2)
+        # self.estudante_02 = Estudante.objects.create(
+        #     nome = 'Teste Estudante DOIS',
+        #     email = 'testeemailestudante02@gmail.com',
+        #     cpf = '76791271078',
+        #     data_nascimento = '2024-01-01',
+        #     celular = '86 99999-9999',
+        # )
 
     def test_requisicao_get_para_listar_estudantes(self):
         """Teste de requisição GET estudantes"""

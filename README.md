@@ -1,12 +1,13 @@
 # API Escola - Django REST Framework
 
-Este repositório contém o código-fonte de uma API RESTful para um sistema de escola, desenvolvida com Django e Django REST Framework. A API permite gerenciar o cadastro de estudantes e cursos.
+Este repositório contém o código-fonte de uma API RESTful para um sistema de escola, desenvolvida com Django e Django REST Framework. A API permite gerenciar o cadastro de estudantes, cursos e matrículas. **Este projeto foi concebido como um estudo prático focado na implementação de testes unitários e de integração em aplicações Django REST Framework.**
 
 ## Funcionalidades
 
 - **Gerenciamento de Estudantes**: CRUD (Criar, Ler, Atualizar, Deletar) para estudantes.
 - **Gerenciamento de Cursos**: CRUD (Criar, Ler, Atualizar, Deletar) para cursos.
 
+-   **Gerenciamento de Matrículas**: Operações CRUD (Criar, Ler, Atualizar, Deletar) para matrículas.
 ## Tecnologias Utilizadas
 
 - **Python 3**
@@ -35,7 +36,7 @@ Com ele, você pode:
 
 1.  **Clone o repositório:**
     ```bash
-    git clone <URL_DO_SEU_REPOSITORIO>
+    git clone https://github.com/ronaldodeschain/django_rest_framework.git
     cd django_rest_framework
     ```
 
@@ -76,5 +77,26 @@ Use o Thunder Client para fazer requisições para os seguintes endpoints:
 - `POST /estudantes/`: Cria um novo estudante.
 - `GET /cursos/`: Lista todos os cursos.
 - `POST /cursos/`: Cria um novo curso.
+- `GET /matriculas/`: Lista todas as matrículas.
+- `POST /matriculas/`: Cria uma nova matrícula.
 
 **Importante**: Ao usar o Django REST Framework com o `DefaultRouter`, lembre-se sempre de adicionar uma barra (`/`) ao final das URLs, como `/cursos/` e `/estudantes/`, para evitar erros de redirecionamento em requisições `POST`.
+
+## Testes
+
+Este projeto inclui uma suíte de testes abrangente, demonstrando a aplicação de testes unitários e de integração para garantir a correção e a robustez da aplicação.
+
+### Tipos de Testes
+
+-   **Testes Unitários de Modelo**: Localizados em `escola/tests/test_models.py`, estes testes verificam o comportamento individual dos modelos (`Estudante`, `Curso`, `Matricula`), assegurando que a lógica de cada componente funcione como esperado.
+-   **Testes de Integração de API**: Encontrados em `escola/tests/test_cursos.py`, `escola/tests/test_matriculas.py`, e `escola/tests/test_fixtures.py` (que valida o carregamento da fixture), estes testes utilizam `APITestCase` do Django REST Framework para simular requisições HTTP. Eles verificam o fluxo completo da API, incluindo listagem, criação, atualização e exclusão de recursos, e a interação com as fixtures.
+
+### Executando os Testes
+
+Para executar todos os testes do projeto, utilize o comando:
+
+```bash
+python manage.py test
+```
+
+Os testes dependem de uma fixture (`prototipo_banco.json`) que é carregada automaticamente no início da execução dos testes para popular o banco de dados de teste com dados iniciais consistentes.
